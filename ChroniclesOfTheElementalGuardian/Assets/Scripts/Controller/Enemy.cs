@@ -14,9 +14,11 @@ public class Enemy : MonoBehaviour, IDamagable
 
     public void TakeDamage(float damage, DamageType damageType)
     {
-        _currentHealth -= CalculateDamage(damage,damageType);
+        Debug.Log($"Enemy: Incoming Damage: {damage}, DamageType: {damageType}");
+        float finalDamage = CalculateDamage(damage,damageType);
+        _currentHealth -= finalDamage;
         _currentHealth = Mathf.Clamp(_currentHealth,0,enemyStats.MaxHealth);
-        Debug.Log($"Enemy Took Damage CurrentHealth: {_currentHealth}");
+        Debug.Log($"Enemy Took Damage Amount: {finalDamage}, CurrentHealth: {_currentHealth}");
         if(_currentHealth <= 0)
         {
             Die();
@@ -48,6 +50,7 @@ public class Enemy : MonoBehaviour, IDamagable
             break;
 
         }
+        damage = Mathf.Clamp(damage,0,damage);
         return damage;
     }
 

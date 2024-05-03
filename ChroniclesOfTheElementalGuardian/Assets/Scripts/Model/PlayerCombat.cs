@@ -8,6 +8,7 @@ public class PlayerCombat
     private List<Skill> _skills = new List<Skill>();
     private int _currentSelectedSkillID = 0;
     private Transform transform;
+    
 
     public PlayerCombat(PlayerStats playerStats, Transform transform)
     {
@@ -56,7 +57,29 @@ public class PlayerCombat
 
     private void BasicAttack()
     {
-        Debug.Log("Basic Attack");
+        Debug.Log("Basic Attacking");
+
+        
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.right, playerStats.meleeRange, playerStats.basicAttackLayerMask);
+        
+        if(hitInfo.collider != null) // Checking if the ray hit a collider
+        {
+            Debug.Log("Hit Something");
+            Debug.DrawRay(transform.position, transform.right * hitInfo.distance, Color.red);
+            
+            // Attempt to get the IDamagable component from the hit collider
+            IDamagable damagable;
+            if(hitInfo.transform.TryGetComponent<IDamagable>(out damagable))
+            {
+                damagable.TakeDamage(playerStats.Damage, DamageType.Physical);
+                Debug.Log("Found IDamagable"); 
+            }
+        }
+        else
+        {
+            Debug.Log("Didn't Hit");
+            Debug.DrawRay(transform.position, transform.right * 100, Color.blue); // Draw the ray up to the max distance
+        }
     }
 
     private void Defend()

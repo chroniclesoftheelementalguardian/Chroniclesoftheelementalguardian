@@ -17,5 +17,7 @@ public class PlayerStats
     public float EarthArmor;
     public float WaterArmor;
     public float AirArmor;
+    public float meleeRange;
+    public LayerMask basicAttackLayerMask;
     [HideInInspector] public float CurrentHealth;
 }
