@@ -7,10 +7,12 @@ public class PlayerCombat
     private Skill _selectedSkill;
     private List<Skill> _skills = new List<Skill>();
     private int _currentSelectedSkillID = 0;
+    private Transform transform;
 
-    public PlayerCombat(PlayerStats playerStats)
+    public PlayerCombat(PlayerStats playerStats, Transform transform)
     {
         this.playerStats = playerStats;
+        this.transform = transform;
         RegisterEvents();
         ConstructSkills();
     }
@@ -72,6 +74,6 @@ public class PlayerCombat
 
     private void UseSkill()
     {
-        _selectedSkill.Use();
+        _selectedSkill.Use(playerStats.AbilityPower, transform);
     }
 }

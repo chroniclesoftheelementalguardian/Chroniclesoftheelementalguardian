@@ -4,8 +4,24 @@ using UnityEngine;
 
 public class EarthSkill : Skill
 {
-    public override void Use()
+    public override DamageType GetDamageType()
     {
-        Debug.Log("Earth Skill");
+        return DamageType.Earth;
+    }
+
+    public override void Use(float abilityPower, Transform userTransform)
+    {
+        SpawnProjectile(
+            userTransform.position,
+            userTransform.right,
+            "Enemy",
+            10,
+            abilityPower
+        );
+    }
+
+    protected override string GetProjectileTag()
+    {
+        return "Projectile";
     }
 }

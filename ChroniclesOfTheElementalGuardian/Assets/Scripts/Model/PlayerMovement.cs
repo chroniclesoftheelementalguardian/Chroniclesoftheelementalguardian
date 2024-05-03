@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 [Serializable]
 public class PlayerMovement
@@ -21,14 +22,15 @@ public class PlayerMovement
 
     private void OnInputA()
     {
-        transform.localScale = new Vector3(-1, 1, 1);
-        Move(Vector3.left);
+        transform.DORotate(new Vector3(0,180,0), 0f);
+        Move(Vector2.right);
+        
     }
 
     private void OnInputD()
     {
-        transform.localScale = new Vector3(1, 1, 1);
-        Move(Vector3.right);
+        transform.DORotate(new Vector3(0,0,0), 0f);
+        Move(Vector2.right);
     }
 
     private void OnInputW()
@@ -44,7 +46,7 @@ public class PlayerMovement
         Land();
     }
 
-    private void Move(Vector3 direction)
+    private void Move(Vector2 direction)
     {
         transform.Translate(direction * Time.deltaTime * playerStats.MoveSpeed);
     }
