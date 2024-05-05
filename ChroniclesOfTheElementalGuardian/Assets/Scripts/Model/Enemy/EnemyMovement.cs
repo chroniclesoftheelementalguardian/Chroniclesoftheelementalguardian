@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using DG.Tweening;
 
 public class EnemyMovement
 {
@@ -8,6 +9,8 @@ public class EnemyMovement
     Player _player;
     Transform transform;
     private bool _canMoveToPlayer = false;
+    
+    public event Action<bool> Move;
     
 
     public EnemyMovement(EnemyStats enemyStats, PlayerDetection playerDetection, Transform transform, Player player)
@@ -33,20 +36,30 @@ public class EnemyMovement
 
     public void TryMoveToPlayer()
     {
-        if (!_canMoveToPlayer) return;
+        if (!_canMoveToPlayer) {Move?.Invoke(false); return;}
         MoveToPlayer();
     }
 
     private void MoveToPlayer()
     {
+        Move?.Invoke(true);
         Vector3 direction = (_player.transform.position - transform.position).normalized;
-        transform.Translate(Vector3.right * direction.x * Time.deltaTime * _enemyStats.MoveSpeed);
+        if(direction.x < 0)
+        {
+            transform.DORotate(new Vector3(0,180,0), 0f);
+        }
+        else
+        {
+            transform.DORotate(new Vector3(0,0,0), 0f);
+        }
+        transform.Translate(Vector3.right * Time.deltaTime * _enemyStats.MoveSpeed);
     }
 
     public bool CanAttack()
     {
         if(Vector2.Distance(_player.transform.position, transform.position) <= _enemyStats.MeleeRange)
         {
+            Move?.Invoke(false);
             return true;
         }
         return false;

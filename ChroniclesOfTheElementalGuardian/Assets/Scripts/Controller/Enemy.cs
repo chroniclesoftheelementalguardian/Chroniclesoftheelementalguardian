@@ -4,9 +4,11 @@ public class Enemy : MonoBehaviour, IDamagable
 {
     [SerializeField] private EnemyStats enemyStats;
     [SerializeField] private PlayerDetection playerDetection;
+    [SerializeField] private Animator animator;
     Player _player;
     EnemyMovement enemyMovement;
     EnemyCombat enemyCombat;
+    EnemyAnimator enemyAnimator;
 
     private float _currentHealth;
 
@@ -16,6 +18,7 @@ public class Enemy : MonoBehaviour, IDamagable
         _currentHealth = enemyStats.MaxHealth;
         enemyMovement = new EnemyMovement(enemyStats,playerDetection,transform,_player);
         enemyCombat = new EnemyCombat(enemyStats,_player);
+        enemyAnimator = new EnemyAnimator(animator,enemyCombat,enemyMovement);
     }
 
     private void Update() 

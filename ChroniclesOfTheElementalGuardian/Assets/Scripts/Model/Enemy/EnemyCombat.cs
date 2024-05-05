@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyCombat
@@ -5,6 +6,9 @@ public class EnemyCombat
     Player _player;
     EnemyStats _enemyStats;
     private float _meleeCooldownCounter = float.MaxValue;
+
+    public event Action Attacking;
+
 
     public EnemyCombat(EnemyStats enemyStats,Player player)
     {
@@ -15,6 +19,7 @@ public class EnemyCombat
     public void Attack()
     {
         if(Cooldown()) return;
+        Attacking?.Invoke();
         _player.TakeDamage(_enemyStats.Damage, DamageType.Physical);
         ResetCooldown();
     }

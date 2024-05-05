@@ -4,7 +4,9 @@ using UnityEngine;
 public class Player : MonoBehaviour, IDamagable
 {
     [SerializeField] PlayerStats playerStats;
-    
+    [SerializeField] private Animator _playerAnimator;
+
+    PlayerAnimator playerAnimator;
     PlayerMovement playerMovement;
     PlayerCombat playerCombat;
     PlayerStatRegeneration playerStatRegeneration;
@@ -48,6 +50,7 @@ public class Player : MonoBehaviour, IDamagable
         playerMovement = new PlayerMovement(rb2D,transform,playerStats);
         playerCombat = new PlayerCombat(playerStats,transform);
         playerStatRegeneration = new PlayerStatRegeneration(playerStats);
+        playerAnimator = new PlayerAnimator(_playerAnimator);
     }
 
     private void InitializeStats()

@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using DG.Tweening;
-using Unity.VisualScripting;
 
 [Serializable]
 public class PlayerMovement
@@ -90,14 +88,17 @@ public class PlayerMovement
 
     public void RegisterEvents()
     {
-        InputReader.InputA += OnInputA;
-        InputReader.InputD += OnInputD;
+        InputReader.MoveLeftPressed += OnInputA;
+        InputReader.MoveRightPressed += OnInputD;
         InputReader.InputW += OnInputW;
         InputReader.InputS += OnInputS;
     }
 
     public void UnregisterEvents()
     {
-
+        InputReader.MoveLeftPressed -= OnInputA;
+        InputReader.MoveRightPressed -= OnInputD;
+        InputReader.InputW -= OnInputW;
+        InputReader.InputS -= OnInputS;
     }
 }

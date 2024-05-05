@@ -18,6 +18,8 @@ public class PlayerCombat
     public static event Action<Skill> SkillChanged;
     public static event Action NotEnoughMana;
     public static event Action Death;
+    public static event Action CastingSpell;
+    public static event Action Attacking;
     
     private void OnNextSkillPressed()
     {
@@ -116,6 +118,7 @@ public class PlayerCombat
     private void BasicAttack()
     {
         if(_isBasicAttackOnCooldown) return;
+        Attacking?.Invoke();
         _isBasicAttackOnCooldown = true;
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.right, playerStats.meleeRange, playerStats.basicAttackLayerMask);
         
@@ -127,7 +130,6 @@ public class PlayerCombat
                 damagable.TakeDamage(playerStats.PhysicalPower, DamageType.Physical); 
             }
         }
-        
     }
 
     public void CountCooldowns()
@@ -193,6 +195,7 @@ public class PlayerCombat
             NotEnoughMana?.Invoke();
             return;
         }
+        CastingSpell?.Invoke();
         _selectedSkill.Use(playerStats.AbilityPower, transform);
         currentMana = Mathf.Clamp(currentMana - manaCost, 0, playerStats.MaxMana);
         playerStats.CurrentMana = currentMana;

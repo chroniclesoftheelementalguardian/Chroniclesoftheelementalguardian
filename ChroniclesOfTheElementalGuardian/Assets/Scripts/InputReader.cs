@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class InputReader : Singleton<InputReader>
 {
-    public static event Action InputD;
-    public static event Action InputA;
+    public static event Action MoveRightPressed;
+    public static event Action MoveRightUnpressed;
+    public static event Action MoveLeftPressed;
+    public static event Action MoveLeftUnpressed;
     public static event Action InputW;
     public static event Action InputS;
     public static event Action AttackPressed;
@@ -18,12 +20,23 @@ public class InputReader : Singleton<InputReader>
     {
         if(Input.GetKey(KeyCode.D))
         {
-            InputD?.Invoke();
+            MoveRightPressed?.Invoke();
         }   
         if(Input.GetKey(KeyCode.A))
         {
-            InputA?.Invoke();
+            MoveLeftPressed?.Invoke();
         }
+
+        if(!Input.GetKey(KeyCode.D))
+        {
+            MoveRightUnpressed?.Invoke();
+        }   
+        
+        if(!Input.GetKey(KeyCode.A))
+        {
+            MoveLeftUnpressed?.Invoke();
+        }
+
         if(Input.GetKeyDown(KeyCode.W))
         {
             InputW?.Invoke();
