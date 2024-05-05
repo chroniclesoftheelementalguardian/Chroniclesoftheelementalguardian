@@ -10,6 +10,16 @@ public class AirSkill : Skill
         return DamageType.Air;
     }
 
+    public override float GetManaCost()
+    {
+        return 10;
+    }
+
+    public override string GetSkillName()
+    {
+        return "Air";
+    }
+
     public override void Use(float abilityPower, Transform userTransform)
     {
         SpawnProjectile(

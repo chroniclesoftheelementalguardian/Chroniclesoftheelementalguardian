@@ -9,6 +9,16 @@ public class WaterSkill : Skill
         return DamageType.Water;
     }
 
+    public override float GetManaCost()
+    {
+        return 10;
+    }
+
+    public override string GetSkillName()
+    {
+        return "Water";
+    }
+
     public override void Use(float abilityPower, Transform userTransform)
     {
         SpawnProjectile(

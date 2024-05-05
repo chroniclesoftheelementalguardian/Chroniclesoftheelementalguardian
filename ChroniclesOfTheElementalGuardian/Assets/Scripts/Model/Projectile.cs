@@ -1,6 +1,7 @@
 using ObjectPooling;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class Projectile : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        if(other.CompareTag(_targetTag))
+        if(!String.IsNullOrEmpty(other.tag) && other.CompareTag(_targetTag))
         {
             other.TryGetComponent<IDamagable>(out IDamagable target);
             target.TakeDamage(_damage,_damageType);
@@ -46,11 +47,8 @@ public class Projectile : MonoBehaviour
 
     private void Reset()
     {
+        if(_isActive == false) return;
         _isActive = false;
-        _damage = 0;
-        _speed = 0;
-        _targetTag = null;
-        _damageType = DamageType.Physical;
         IObjectPool.Release(transform);
     }
 

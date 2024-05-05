@@ -1,15 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamagable
 {
     [SerializeField] private EnemyStats enemyStats;
+    [SerializeField] private PlayerDetection playerDetection;
+    Player _player;
+    EnemyMovement enemyMovement;
+    EnemyCombat enemyCombat;
+
     private float _currentHealth;
 
     private void Awake() 
     {
+        _player = FindObjectOfType<Player>();
         _currentHealth = enemyStats.MaxHealth;
+        enemyMovement = new EnemyMovement(enemyStats,playerDetection,transform,_player);
+        enemyCombat = new EnemyCombat(enemyStats,_player);
+    }
+
+    private void Update() 
+    {
+        if(enemyMovement.CanAttack())
+        {
+            enemyCombat.Attack();
+            return;
+        }
+        enemyMovement.TryMoveToPlayer();
     }
 
     public void TakeDamage(float damage, DamageType damageType)
@@ -57,5 +73,10 @@ public class Enemy : MonoBehaviour, IDamagable
     private void Die()
     {
         gameObject.SetActive(false);
+    }
+
+    private void OnDisable() 
+    {
+        enemyMovement.UnregisterEvents();
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace ObjectPooling
@@ -25,9 +26,11 @@ namespace ObjectPooling
             {
                 if(poolObjectTransform == _activePoolObjects[i].GetTransform())
                 {
+                    //Debug.Log("Found Transform inside activePoolObjects list");
                     return _activePoolObjects[i];
                 }
             }
+            //Debug.Log("No Transform is Found Returning Null");
             return null;
         }
         
@@ -35,14 +38,18 @@ namespace ObjectPooling
 
         public static PoolObject GetFromPool(string poolSlotTag, bool shouldActivate)
         {
+            Debug.Log("Getting From Pool");
             PoolObject poolObject = _objectPool.GetFromPool(poolSlotTag, shouldActivate);
             _activePoolObjects.Add(poolObject);
+            Debug.Log("Added PoolObject To List");
             return poolObject;
         }
 
         public static void Release(Transform poolObjectTransform)
         {
+            Debug.Log($"IObjectPool.Release(Transform transform), Transform: {poolObjectTransform.name}");
             PoolObject poolObject = GetFromTransform(poolObjectTransform);
+            //Debug.Log($"Acquired PoolObject = {poolObject}");
             Release(poolObject);
         }
 
@@ -53,8 +60,8 @@ namespace ObjectPooling
 
         public static void Release(PoolObject poolObject)
         {
-            poolObject.Release();
             StopTracking(poolObject);
+            poolObject.Release();
         }
 
         public static void ReleaseAll()

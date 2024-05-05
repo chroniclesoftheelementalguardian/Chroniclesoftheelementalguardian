@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7f6a007d98784e449e05cd2d29c7b3f, type: 3}
-  m_Name: EnemyStats
+  m_Name: ZenoRealmKeeper
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
+  _moveSpeed: 1.25
   _jumpingPower: 5
   _landingPower: 5
   _maxHealth: 20
@@ -23,3 +23,5 @@ MonoBehaviour:
   _earthArmor: 15
   _waterArmor: 10
   _airArmor: 5
+  _meleeRange: 0.25
+  _meleeCooldown: 1

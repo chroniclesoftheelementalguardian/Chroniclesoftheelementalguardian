@@ -1,3 +1,4 @@
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IDamagable
@@ -6,18 +7,35 @@ public class Player : MonoBehaviour, IDamagable
     
     PlayerMovement playerMovement;
     PlayerCombat playerCombat;
+    PlayerStatRegeneration playerStatRegeneration;
 
     Rigidbody2D rb2D;
 
-    private void Awake() 
+    private void Awake()
     {
         CacheComponents();
         SetupConstructors();
+        InitializeStats();
+    }
+
+    private void Update() 
+    {
+        playerCombat.CountDownDefense();
+        playerStatRegeneration.RegenerateStats();
     }
 
     private void OnCollisionEnter2D(Collision2D other) 
     {
         playerMovement.OnCollisionEnter2D(other);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        if(other.CompareTag("Potion"))
+        {
+            Potion potion = other.GetComponent<Potion>();
+            potion.Use(playerStats);
+        }
     }
 
     private void CacheComponents()
@@ -29,50 +47,22 @@ public class Player : MonoBehaviour, IDamagable
     {
         playerMovement = new PlayerMovement(rb2D,transform,playerStats);
         playerCombat = new PlayerCombat(playerStats,transform);
+        playerStatRegeneration = new PlayerStatRegeneration(playerStats);
+    }
+
+    private void InitializeStats()
+    {
+        playerStats.CurrentHealth = playerStats.MaxHealth;
+        playerStats.CurrentMana = playerStats.MaxMana;
     }
 
     public void TakeDamage(float damage, DamageType damageType)
     {
-        float currentHealth = playerStats.CurrentHealth;
-        currentHealth -= CalculateDamage(damage,damageType);
-        currentHealth = Mathf.Clamp(currentHealth,0,playerStats.MaxHealth);
-        if(currentHealth <= 0)
-        {
-            Die();
-        }
-        playerStats.CurrentHealth = currentHealth;
+        playerCombat.TakeDamage(damage,damageType);
     }
 
-    private float CalculateDamage(float damage, DamageType damageType)
+    public PlayerStats GetPlayerStats()
     {
-        switch(damageType)
-        {
-            case DamageType.Physical:
-                damage -= playerStats.PhysicalArmor;
-            break;
-
-            case DamageType.Fire:
-                damage -= playerStats.FireArmor;
-            break;
-
-            case DamageType.Water:
-                damage -= playerStats.WaterArmor;
-            break;
-
-            case DamageType.Earth:
-                damage -= playerStats.EarthArmor;
-            break;
-
-            case DamageType.Air:
-                damage -= playerStats.AirArmor;
-            break;
-
-        }
-        return damage;
-    }
-
-    private void Die()
-    {
-
+        return playerStats;
     }
 }

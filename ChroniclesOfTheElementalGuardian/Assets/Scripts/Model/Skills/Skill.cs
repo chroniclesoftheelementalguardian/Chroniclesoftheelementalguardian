@@ -5,7 +5,9 @@ public abstract class Skill
 {
     public abstract void Use(float abilityPower, Transform userTransform);
     public abstract DamageType GetDamageType();
+    public abstract string GetSkillName();
     protected abstract string GetProjectileTag();
+    public abstract float GetManaCost();
 
     protected void SpawnProjectile(Vector3 spawnPos, Vector3 direction,string targetTag, float speed,float abilityPower)
     {

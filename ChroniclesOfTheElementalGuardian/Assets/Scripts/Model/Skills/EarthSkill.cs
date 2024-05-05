@@ -9,6 +9,16 @@ public class EarthSkill : Skill
         return DamageType.Earth;
     }
 
+    public override float GetManaCost()
+    {
+        return 10;
+    }
+
+    public override string GetSkillName()
+    {
+        return "Earth";
+    }
+
     public override void Use(float abilityPower, Transform userTransform)
     {
         SpawnProjectile(

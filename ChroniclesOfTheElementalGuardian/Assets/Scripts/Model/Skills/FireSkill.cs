@@ -9,6 +9,16 @@ public class FireSkill : Skill
         return DamageType.Fire;
     }
 
+    public override float GetManaCost()
+    {
+        return 10;
+    }
+
+    public override string GetSkillName()
+    {
+        return "Fire";
+    }
+
     public override void Use(float abilityPower, Transform userTransform)
     {
         SpawnProjectile(
