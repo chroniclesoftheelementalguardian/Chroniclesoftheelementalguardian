@@ -1,16 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RedPotion : Potion
 {
+    private float _cooldownDecreaseAmount;
+    private float _physicalPowerIncreaseAmount;
+
+
     public override void Use(PlayerStats playerStats)
     {
-        throw new System.NotImplementedException();
+        _playerStats = playerStats;
+        DeactivateVisuals();
+        ActivateEffect();
+        ActivateDuration();
+    }
+
+    protected override void ActivateEffect()
+    {
+        _cooldownDecreaseAmount = _playerStats.BasicAttackCooldown * (_increasePercentage / 100);
+        _physicalPowerIncreaseAmount = _playerStats.PhysicalPower * (_increasePercentage / 100);
+
+        _playerStats.BasicAttackCooldown = Mathf.Clamp(_playerStats.BasicAttackCooldown - _cooldownDecreaseAmount, 0, float.MaxValue);
+        _playerStats.PhysicalPower += _physicalPowerIncreaseAmount;
     }
 
     protected override void DeactivateEffect()
     {
-        throw new System.NotImplementedException();
+        _playerStats.BasicAttackCooldown += _cooldownDecreaseAmount;
+        _playerStats.PhysicalPower -= _physicalPowerIncreaseAmount;
     }
 }

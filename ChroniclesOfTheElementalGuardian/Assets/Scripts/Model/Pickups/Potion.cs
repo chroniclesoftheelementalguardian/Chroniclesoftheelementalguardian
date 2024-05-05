@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Potion : MonoBehaviour
@@ -8,17 +6,21 @@ public abstract class Potion : MonoBehaviour
     [SerializeField] protected float _increasePercentage;
     [SerializeField] protected float _effectDuration;
     protected Collider2D _collider;
+    protected PlayerStats _playerStats;
+    protected float _increaseAmount;
 
     private float _durationCounter;
     private bool _isDurationActive;
 
     public abstract void Use(PlayerStats playerStats);
     protected abstract void DeactivateEffect();
+    protected abstract void ActivateEffect();
 
     private void Awake() 
     {
         _collider = GetComponent<Collider2D>();
     }
+
 
     protected void ActivateDuration()
     {

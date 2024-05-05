@@ -7,10 +7,11 @@ public class InputReader : Singleton<InputReader>
     public static event Action InputA;
     public static event Action InputW;
     public static event Action InputS;
-    public static event Action InputSpace;
-    public static event Action InputE;
-    public static event Action InputR;
-    public static event Action InputTab;
+    public static event Action AttackPressed;
+    public static event Action SkillPressed;
+    public static event Action DefendPressed;
+    public static event Action NextSkillPressed;
+    public static event Action PreviousSkillPressed;
     
     // Update is called once per frame
     void Update()
@@ -31,21 +32,30 @@ public class InputReader : Singleton<InputReader>
         {
             InputS?.Invoke();
         }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            AttackPressed?.Invoke();
+        }
+
+        if(Input.GetMouseButtonDown(1))
+        {
+            DefendPressed?.Invoke();
+        }
+
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            InputSpace?.Invoke();
+            SkillPressed?.Invoke();
         }
+        
         if(Input.GetKeyDown(KeyCode.E))
         {
-            InputE?.Invoke();
+            NextSkillPressed?.Invoke();
         }
-        if(Input.GetKeyDown(KeyCode.R))
+
+        if(Input.GetKeyDown(KeyCode.Q))
         {
-            InputR?.Invoke();
-        }
-        if(Input.GetKeyDown(KeyCode.Tab))
-        {
-            InputTab?.Invoke();
+            PreviousSkillPressed?.Invoke();
         }
     }
 }

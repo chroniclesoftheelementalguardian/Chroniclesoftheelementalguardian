@@ -1,8 +1,5 @@
 public class GreenPotion : Potion
 {
-    PlayerStats _playerStats;
-    private float _increaseAmount;
-
     public override void Use(PlayerStats playerStats)
     {
         _playerStats = playerStats;
@@ -10,7 +7,7 @@ public class GreenPotion : Potion
         DeactivateVisuals();
     }
 
-    private void ActivateEffect()
+    protected override void ActivateEffect()
     {
         _increaseAmount =  _playerStats.MaxHealth * (_increasePercentage / 100);
 

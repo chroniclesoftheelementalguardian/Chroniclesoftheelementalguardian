@@ -1,16 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class BluePotion : Potion
 {
     public override void Use(PlayerStats playerStats)
     {
-        throw new System.NotImplementedException();
+        _playerStats = playerStats;
+        ActivateEffect();
+        DeactivateVisuals();
+    }
+
+    protected override void ActivateEffect()
+    {
+        _increaseAmount =  _playerStats.MaxMana * (_increasePercentage / 100);
+
+        _playerStats.MaxMana += _increaseAmount;
+        _playerStats.CurrentMana += _increaseAmount;
     }
 
     protected override void DeactivateEffect()
     {
-        throw new System.NotImplementedException();
+        _playerStats.MaxMana -= _increaseAmount;
+        _playerStats.CurrentMana -= _increaseAmount;
     }
 }

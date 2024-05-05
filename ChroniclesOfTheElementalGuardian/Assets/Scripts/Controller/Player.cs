@@ -20,7 +20,7 @@ public class Player : MonoBehaviour, IDamagable
 
     private void Update() 
     {
-        playerCombat.CountDownDefense();
+        playerCombat.CountCooldowns();
         playerStatRegeneration.RegenerateStats();
     }
 

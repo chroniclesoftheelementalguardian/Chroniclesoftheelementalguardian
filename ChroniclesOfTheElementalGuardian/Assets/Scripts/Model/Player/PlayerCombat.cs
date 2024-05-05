@@ -11,28 +11,35 @@ public class PlayerCombat
     private Transform transform;
     
     private bool _isDefenseActive;
+    private bool _isBasicAttackOnCooldown;
     private float _defenseCounter = float.MaxValue;
+    private float _basicAttackCounter = float.MaxValue;
 
     public static event Action<Skill> SkillChanged;
     public static event Action NotEnoughMana;
     public static event Action Death;
     
-    private void OnInputTab()
+    private void OnNextSkillPressed()
     {
-        ChangeSelectedSkill();
+        SelectNextSkill();
     }
 
-    private void OnInputR()
+    private void OnPreviousSkillPressed()
+    {
+        SelectPreviousSkill();
+    }
+
+    private void OnDefendPressed()
     {
         Defend();
     }
 
-    private void OnInputE()
+    private void OnSkillPressed()
     {
         UseSkill();
     }
 
-    private void OnInputSpace()
+    private void OnAttackPressed()
     {
         BasicAttack();
     }
@@ -43,17 +50,6 @@ public class PlayerCombat
         this.transform = transform;
         RegisterEvents();
         ConstructSkills();
-    }
-
-    public void CountDownDefense()
-    {
-        if(!_isDefenseActive) return;
-        if(_defenseCounter > playerStats.defenseDuration)
-        {
-            _isDefenseActive = false;
-            _defenseCounter = float.MaxValue;
-        }
-        _defenseCounter += Time.deltaTime;
     }
 
     public void TakeDamage(float damage, DamageType damageType)
@@ -91,10 +87,20 @@ public class PlayerCombat
 
     private void RegisterEvents()
     {
-        InputReader.InputSpace += OnInputSpace;
-        InputReader.InputE += OnInputE;
-        InputReader.InputR += OnInputR;
-        InputReader.InputTab += OnInputTab;
+        InputReader.AttackPressed += OnAttackPressed;
+        InputReader.SkillPressed += OnSkillPressed;
+        InputReader.DefendPressed += OnDefendPressed;
+        InputReader.NextSkillPressed += OnNextSkillPressed;
+        InputReader.PreviousSkillPressed += OnPreviousSkillPressed;
+    }
+
+    public void UnregisterEvents()
+    {
+        InputReader.AttackPressed -= OnAttackPressed;
+        InputReader.SkillPressed -= OnSkillPressed;
+        InputReader.DefendPressed -= OnDefendPressed;
+        InputReader.NextSkillPressed -= OnNextSkillPressed;
+        InputReader.PreviousSkillPressed -= OnPreviousSkillPressed;
     }
 
     private void ConstructSkills()
@@ -109,6 +115,8 @@ public class PlayerCombat
 
     private void BasicAttack()
     {
+        if(_isBasicAttackOnCooldown) return;
+        _isBasicAttackOnCooldown = true;
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.right, playerStats.meleeRange, playerStats.basicAttackLayerMask);
         
         if(hitInfo.collider != null)
@@ -119,8 +127,38 @@ public class PlayerCombat
                 damagable.TakeDamage(playerStats.PhysicalPower, DamageType.Physical); 
             }
         }
+        
     }
 
+    public void CountCooldowns()
+    {
+        CountDownBasicAttackCooldown();
+        CountDownDefense();
+    }
+
+    public void CountDownBasicAttackCooldown()
+    {
+        if(!_isBasicAttackOnCooldown) return;
+        if(_basicAttackCounter >= playerStats.BasicAttackCooldown)
+        {
+            _isBasicAttackOnCooldown = false;
+            _basicAttackCounter = 0;
+        }
+        _basicAttackCounter += Time.deltaTime;
+    }
+
+    private void CountDownDefense()
+    {
+        if(!_isDefenseActive) return;
+        if(_defenseCounter > playerStats.defenseDuration)
+        {
+            _isDefenseActive = false;
+            _defenseCounter = float.MaxValue;
+        }
+        _defenseCounter += Time.deltaTime;
+    }
+
+    
     private void Defend()
     {
         if(_isDefenseActive == true) return;
@@ -129,10 +167,18 @@ public class PlayerCombat
         _defenseCounter = 0;
     }
 
-    private void ChangeSelectedSkill()
+    private void SelectNextSkill()
     {
         _currentSelectedSkillID++;
         if(_currentSelectedSkillID >= _skills.Count){ _currentSelectedSkillID = 0; }
+        _selectedSkill = _skills[_currentSelectedSkillID];
+        SkillChanged?.Invoke(_selectedSkill);
+    }
+
+    private void SelectPreviousSkill()
+    {
+        _currentSelectedSkillID--;
+        if(_currentSelectedSkillID <= 0){ _currentSelectedSkillID = _skills.Count - 1; }
         _selectedSkill = _skills[_currentSelectedSkillID];
         SkillChanged?.Invoke(_selectedSkill);
     }

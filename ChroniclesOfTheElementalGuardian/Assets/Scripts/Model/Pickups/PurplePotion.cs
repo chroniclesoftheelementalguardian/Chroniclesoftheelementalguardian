@@ -1,17 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class PurplePotion : Potion
 {
     public override void Use(PlayerStats playerStats)
     {
-        throw new System.NotImplementedException();
+        _playerStats = playerStats;
+        DeactivateVisuals();
+        ActivateEffect();
+        ActivateDuration();
+    }
+
+    protected override void ActivateEffect()
+    {
+        _playerStats.CanDoubleJump = true;
     }
 
     protected override void DeactivateEffect()
     {
-        throw new System.NotImplementedException();
+        _playerStats.CanDoubleJump = false;
     }
-
 }

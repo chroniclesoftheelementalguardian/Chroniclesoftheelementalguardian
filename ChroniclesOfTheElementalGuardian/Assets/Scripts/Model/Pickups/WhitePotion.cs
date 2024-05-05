@@ -6,11 +6,20 @@ public class WhitePotion : Potion
 {
     public override void Use(PlayerStats playerStats)
     {
-        
+        _playerStats = playerStats;
+        ActivateEffect();
+        ActivateDuration();
+        DeactivateVisuals();
+    }
+
+    protected override void ActivateEffect()
+    {
+        _increaseAmount = _playerStats.MoveSpeed * (_increasePercentage / 100);
+        _playerStats.MoveSpeed += _increaseAmount;
     }
 
     protected override void DeactivateEffect()
     {
-        throw new System.NotImplementedException();
+        _playerStats.MoveSpeed -= _increaseAmount;
     }
 }

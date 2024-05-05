@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 [Serializable]
 public class PlayerMovement
@@ -11,6 +12,7 @@ public class PlayerMovement
     private Transform transform;
     private bool _isOnAir;
     private bool _isLanding;
+    private bool _hasDoubleJumped;
 
     public PlayerMovement(Rigidbody2D rb2D, Transform transform,PlayerStats playerStats)
     {
@@ -35,8 +37,21 @@ public class PlayerMovement
 
     private void OnInputW()
     {
-        if(_isOnAir) return;
+        if (_isOnAir && !playerStats.CanDoubleJump) return;
+        if(playerStats.CanDoubleJump && _hasDoubleJumped) return;
+        if (CanDoubleJump())
+        {
+            _hasDoubleJumped = true;
+            Jump();
+            return;
+        }
         Jump();
+    }
+
+    private bool CanDoubleJump()
+    {
+        if(_isOnAir && playerStats.CanDoubleJump && !_hasDoubleJumped) return true;
+        return false;
     }
 
     private void OnInputS()
@@ -69,6 +84,7 @@ public class PlayerMovement
         {
             _isLanding = false;
             _isOnAir = false;
+            _hasDoubleJumped = false;
         }
     }
 

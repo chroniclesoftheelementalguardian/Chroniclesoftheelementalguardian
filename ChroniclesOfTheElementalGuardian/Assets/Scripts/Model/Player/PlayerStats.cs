@@ -10,13 +10,14 @@ public class PlayerStats
     
     public float MaxHealth;
     public float HealthRegPercentage;
-    [HideInInspector]public float CurrentHealth;
+    
     
     public float MaxMana;
     public float ManaRegPercentage;
-    [HideInInspector]public float CurrentMana;
+    
 
     public float RegCooldown;
+    public float BasicAttackCooldown;
     
     public float PhysicalPower;
     public float AbilityPower;
@@ -27,6 +28,11 @@ public class PlayerStats
     public float AirArmor;
     public float meleeRange;
     public float defenseDuration = 0.5f;
+
     public LayerMask basicAttackLayerMask;
+
+    [HideInInspector] public bool CanDoubleJump = false;
+    [HideInInspector] public float CurrentHealth;
+    [HideInInspector] public float CurrentMana;
     
 }
