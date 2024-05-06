@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using ObjectPooling;
 using UnityEngine;
 
 public class PlayerCombat
@@ -66,6 +67,7 @@ public class PlayerCombat
     {
         float currentHealth = playerStats.CurrentHealth;
         float finalDamage = CalculateDamage(damage, damageType);
+        SpawnDamageText(finalDamage);
         currentHealth -= finalDamage;
         currentHealth = Mathf.Clamp(currentHealth, 0, playerStats.MaxHealth);
         return currentHealth;
@@ -117,19 +119,28 @@ public class PlayerCombat
 
     private void BasicAttack()
     {
-        if(_isBasicAttackOnCooldown) return;
+        if (_isBasicAttackOnCooldown) return;
+        SpawnAttackFX();
+
         Attacking?.Invoke();
         _isBasicAttackOnCooldown = true;
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.right, playerStats.meleeRange, playerStats.basicAttackLayerMask);
-        
-        if(hitInfo.collider != null)
+
+        if (hitInfo.collider != null)
         {
             IDamagable damagable;
-            if(hitInfo.transform.TryGetComponent<IDamagable>(out damagable))
+            if (hitInfo.transform.TryGetComponent<IDamagable>(out damagable))
             {
-                damagable.TakeDamage(playerStats.PhysicalPower, DamageType.Physical); 
+                damagable.TakeDamage(playerStats.PhysicalPower, DamageType.Physical);
             }
         }
+    }
+
+    private void SpawnAttackFX()
+    {
+        PoolObject poolObject = IObjectPool.GetFromPool("Swoosh", true);
+        poolObject.SetWorldPosition(transform.position + transform.right / 2);
+        poolObject.GetTransform().right = transform.right;
     }
 
     public void CountCooldowns()
@@ -228,5 +239,14 @@ public class PlayerCombat
         }
         damage = Mathf.Clamp(damage,0,damage);
         return damage;
+    }
+
+    private void SpawnDamageText(float finalDamage)
+    {
+        PoolObject poolObject = IObjectPool.GetFromPool("DamageText", false);
+        DamageText damageText = poolObject.GetGameObject().GetComponent<DamageText>();
+        damageText.Setup(finalDamage);
+        poolObject.SetWorldPosition(transform.position + Vector3.up * 3/4);
+        poolObject.SetActive(true);
     }
 }

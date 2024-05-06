@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StatsUI : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class StatsUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI _abilityPowerText;
     [SerializeField] TextMeshProUGUI _currentHealthText;
     [SerializeField] TextMeshProUGUI _currentManaText;
+    [SerializeField] Image _healthBarImage,_manaBarImage;
 
     [SerializeField] private Player player;
     private PlayerStats playerStats;
@@ -27,7 +29,9 @@ public class StatsUI : MonoBehaviour
     {
         _physicalPowerText.text = $"Physical Power: {playerStats.PhysicalPower}";
         _abilityPowerText.text = $"Ability Power: {playerStats.AbilityPower}";
-        _currentHealthText.text = $"Health: {Mathf.FloorToInt(playerStats.CurrentHealth)}";
-        _currentManaText.text = $"Mana: {Mathf.FloorToInt(playerStats.CurrentMana)}";
+        _currentHealthText.text = $"{Mathf.FloorToInt(playerStats.CurrentHealth)} / {Mathf.FloorToInt(playerStats.MaxHealth)}";
+        _currentManaText.text = $"{Mathf.FloorToInt(playerStats.CurrentMana)} / {Mathf.FloorToInt(playerStats.MaxMana)}";
+        _healthBarImage.fillAmount = playerStats.CurrentHealth / playerStats.MaxHealth;
+        _manaBarImage.fillAmount = playerStats.CurrentMana / playerStats.MaxMana;
     }
 }

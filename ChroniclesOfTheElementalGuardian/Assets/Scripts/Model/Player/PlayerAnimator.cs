@@ -21,13 +21,11 @@ public class PlayerAnimator
 
     private void Attack()
     {
-        Debug.Log("Attack");
         _animator.SetTrigger("Attack");
     }
 
     private void CastSpell()
     {
-        Debug.Log("CastSpell");
         _animator.SetTrigger("Cast");
     }
 
