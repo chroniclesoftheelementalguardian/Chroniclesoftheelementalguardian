@@ -1,27 +1,39 @@
 using System;
+using ObjectPooling;
 using UnityEngine;
 
 public class EnemyCombat
 {
     Player _player;
     EnemyStats _enemyStats;
+    Transform transform;
     private float _meleeCooldownCounter = float.MaxValue;
 
     public event Action Attacking;
 
 
-    public EnemyCombat(EnemyStats enemyStats,Player player)
+    public EnemyCombat(EnemyStats enemyStats,Player player, Transform transform)
     {
         _enemyStats =enemyStats;
         _player = player;
+        this.transform = transform;
     }
 
     public void Attack()
     {
         if(Cooldown()) return;
         Attacking?.Invoke();
+        SpawnAttackFX();
+        
         _player.TakeDamage(_enemyStats.Damage, DamageType.Physical);
         ResetCooldown();
+    }
+
+    private void SpawnAttackFX()
+    {
+        PoolObject poolObject = IObjectPool.GetFromPool("Swoosh", true);
+        poolObject.SetWorldPosition(transform.position + transform.right / 2);
+        poolObject.GetTransform().right = transform.right;
     }
 
     private bool Cooldown()
