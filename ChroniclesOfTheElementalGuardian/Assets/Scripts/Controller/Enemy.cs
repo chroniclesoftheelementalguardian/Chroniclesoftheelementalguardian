@@ -20,7 +20,6 @@ public class Enemy : MonoBehaviour, IDamagable
         enemyMovement = new EnemyMovement(enemyStats,playerDetection,transform,_player);
         enemyCombat = new EnemyCombat(enemyStats,_player,transform);
         enemyAnimator = new EnemyAnimator(animator,enemyCombat,enemyMovement);
-        enemyStats.CurrentHealth = enemyStats.MaxHealth;
     }
 
     private void Update() 
@@ -37,10 +36,10 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         float finalDamage = CalculateDamage(damage,damageType);
         SpawnDamageText(finalDamage);
-        enemyStats.CurrentHealth -= finalDamage;
-        enemyStats.CurrentHealth = Mathf.Clamp(enemyStats.CurrentHealth,0,enemyStats.MaxHealth);
+        _currentHealth -= finalDamage;
+        _currentHealth = Mathf.Clamp(_currentHealth,0,enemyStats.MaxHealth);
 
-        if(enemyStats.CurrentHealth <= 0)
+        if(_currentHealth <= 0)
         {
             Die();
         }
@@ -97,5 +96,10 @@ public class Enemy : MonoBehaviour, IDamagable
     public EnemyStats GetEnemyStats()
     {
         return enemyStats;
+    }
+
+    public float GetCurrentHealth()
+    {
+        return _currentHealth;
     }
 }

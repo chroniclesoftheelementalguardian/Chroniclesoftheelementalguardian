@@ -23,5 +23,6 @@ MonoBehaviour:
   _earthArmor: 15
   _waterArmor: 10
   _airArmor: 5
-  _meleeRange: 2
+  _meleeRange: 1
   _meleeCooldown: 1
+  CurrentHealth: 20
