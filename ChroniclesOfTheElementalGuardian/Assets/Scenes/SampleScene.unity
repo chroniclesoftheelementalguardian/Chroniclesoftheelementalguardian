@@ -3561,6 +3561,15 @@ MonoBehaviour:
   - _slotTag: DamageText
     _slotSize: 5
     _objectToPool: {fileID: 7162820455022411362, guid: f48b3d2e77944174594921de5afa7e51, type: 3}
+  - _slotTag: AirNebula
+    _slotSize: 5
+    _objectToPool: {fileID: 1074101822973241491, guid: 3b2aa75e6365c8145a445ab1611cc28b, type: 3}
+  - _slotTag: Fireball
+    _slotSize: 5
+    _objectToPool: {fileID: 7471640960170668931, guid: 57266b574f6897e4baf6f97965fb7afb, type: 3}
+  - _slotTag: WaterArrow
+    _slotSize: 5
+    _objectToPool: {fileID: 2947087830748922739, guid: 670202b65ba0d09488bf2c9ad805b882, type: 3}
 --- !u!4 &2020042760
 Transform:
   m_ObjectHideFlags: 0

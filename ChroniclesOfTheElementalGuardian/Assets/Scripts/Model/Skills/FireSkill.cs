@@ -32,6 +32,6 @@ public class FireSkill : Skill
 
     protected override string GetProjectileTag()
     {
-        return "Projectile";
+        return "Fireball";
     }
 }

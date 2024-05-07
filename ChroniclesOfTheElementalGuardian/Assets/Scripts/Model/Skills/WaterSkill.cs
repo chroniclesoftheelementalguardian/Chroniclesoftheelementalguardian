@@ -32,6 +32,6 @@ public class WaterSkill : Skill
 
     protected override string GetProjectileTag()
     {
-        return "Projectile";
+        return "WaterArrow";
     }
 }

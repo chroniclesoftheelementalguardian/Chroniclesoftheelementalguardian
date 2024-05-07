@@ -33,6 +33,6 @@ public class AirSkill : Skill
 
     protected override string GetProjectileTag()
     {
-        return "Projectile";
+        return "AirNebula";
     }
 }
