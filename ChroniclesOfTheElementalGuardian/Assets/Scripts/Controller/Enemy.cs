@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private void Update() 
     {
+        enemyCombat.AttackCooldown();
         if(enemyMovement.CanAttack())
         {
             enemyCombat.Attack();
@@ -78,6 +79,11 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private void Die()
     {
+        ZenoRealmKeeper zenoRealmKeeper = GetComponent<ZenoRealmKeeper>();
+        if( zenoRealmKeeper!= null)
+        {
+            zenoRealmKeeper.InvokePlayerSuccess();
+        }
         Death?.Invoke(this);
         gameObject.SetActive(false);
     }
@@ -109,5 +115,16 @@ public class Enemy : MonoBehaviour, IDamagable
     public EnemyMovement GetEnemyMovement()
     {
         return enemyMovement;
+    }
+
+    public EnemyCombat GetEnemyCombat()
+    {
+        return enemyCombat;
+    }
+
+    private void OnDestroy() 
+    {
+        enemyMovement.UnregisterEvents();
+        enemyAnimator.UnregisterEvents();
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Xml.Serialization;
 using UnityEngine;
 
@@ -5,6 +6,7 @@ public class Player : MonoBehaviour, IDamagable
 {
     [SerializeField] PlayerStats playerStats;
     [SerializeField] private Animator _playerAnimator;
+    [SerializeField] private GameObject shieldGameObject;
 
     PlayerAnimator playerAnimator;
     PlayerMovement playerMovement;
@@ -48,7 +50,7 @@ public class Player : MonoBehaviour, IDamagable
     private void SetupConstructors()
     {
         playerMovement = new PlayerMovement(rb2D,transform,playerStats);
-        playerCombat = new PlayerCombat(playerStats,transform);
+        playerCombat = new PlayerCombat(playerStats,transform,shieldGameObject);
         playerStatRegeneration = new PlayerStatRegeneration(playerStats);
         playerAnimator = new PlayerAnimator(_playerAnimator);
     }
@@ -67,5 +69,12 @@ public class Player : MonoBehaviour, IDamagable
     public PlayerStats GetPlayerStats()
     {
         return playerStats;
+    }
+
+    private void OnDestroy() 
+    {
+        playerMovement.UnregisterEvents();
+        playerAnimator.UnregisterEvents();
+        playerCombat.UnregisterEvents();
     }
 }

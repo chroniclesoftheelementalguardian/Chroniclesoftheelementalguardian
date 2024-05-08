@@ -11,7 +11,7 @@ public class FireSkill : Skill
 
     public override float GetManaCost()
     {
-        return 10;
+        return 25;
     }
 
     public override string GetSkillName()

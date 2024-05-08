@@ -12,6 +12,7 @@ public class DeathUI : MonoBehaviour
 
     private void Awake() 
     {
+        PlayerCombat.Death += OnGameFinished;
         DeathTrigger.GameFinished += OnGameFinished;
     }
 
@@ -46,5 +47,6 @@ public class DeathUI : MonoBehaviour
     private void OnDestroy() 
     {
         DeathTrigger.GameFinished -= OnGameFinished;
+        PlayerCombat.Death -= OnGameFinished;
     }
 }

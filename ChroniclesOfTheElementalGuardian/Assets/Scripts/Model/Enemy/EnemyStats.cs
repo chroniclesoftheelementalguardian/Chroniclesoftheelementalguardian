@@ -16,7 +16,6 @@ public class EnemyStats : ScriptableObject
     [SerializeField] private float _airArmor;
     [SerializeField] private float _meleeRange;
     [SerializeField] private float _meleeCooldown;
-    public float CurrentHealth; 
 
      public float MoveSpeed {get {return _moveSpeed;}}
      public float JumpingPower {get {return _jumpingPower;}}

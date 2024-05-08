@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class ZenoRealmKeeper : MonoBehaviour
     private EnemyMovement enemyMovement;
     Rigidbody2D rb2D;
     private bool _isMoving;
+
+    public static event Action PlayerSuccess;
     
     private void Awake() 
     {
@@ -55,5 +58,10 @@ public class ZenoRealmKeeper : MonoBehaviour
     {
         _isMoving = false;
         rb2D.AddForce(Vector2.left * 4 + Vector2.up * 3, ForceMode2D.Impulse);
+    }
+
+    public void InvokePlayerSuccess()
+    {
+        PlayerSuccess?.Invoke();
     }
 }

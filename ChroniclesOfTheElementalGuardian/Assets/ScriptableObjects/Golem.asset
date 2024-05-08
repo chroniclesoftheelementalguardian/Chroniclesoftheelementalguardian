@@ -15,14 +15,13 @@ MonoBehaviour:
   _moveSpeed: 1.25
   _jumpingPower: 5
   _landingPower: 5
-  _maxHealth: 20
-  _physicalPower: 8
+  _maxHealth: 100
+  _physicalPower: 30
   _abilityPower: 5
-  _physicalArmor: 5
-  _fireArmor: 20
-  _earthArmor: 15
-  _waterArmor: 10
+  _physicalArmor: 15
+  _fireArmor: 25
+  _earthArmor: 40
+  _waterArmor: 20
   _airArmor: 5
   _meleeRange: 1
-  _meleeCooldown: 2
-  CurrentHealth: 20
+  _meleeCooldown: 1.5

@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using ObjectPooling;
 using UnityEngine;
 
 public class Block : MonoBehaviour 
 {
     [SerializeField] protected List<Enemy> activeEnemies;
     [SerializeField] private GameObject blockedGameObject;
+    [SerializeField] private Transform _fxSpawnTransform;
 
     private void Awake() 
     {
@@ -33,6 +35,13 @@ public class Block : MonoBehaviour
         if(activeEnemies.Count > 0) return;
         //Spawn VFX.
         if(blockedGameObject != null){ blockedGameObject.SetActive(true); }
+        PoolObject poolObject = IObjectPool.GetFromPool("BlockDisableFX", true);
+        poolObject.SetWorldPosition(_fxSpawnTransform.position);
         gameObject.SetActive(false);
+    }
+
+    private void OnDestroy() 
+    {
+        Enemy.Death -= RemoveEnemy;
     }
 }

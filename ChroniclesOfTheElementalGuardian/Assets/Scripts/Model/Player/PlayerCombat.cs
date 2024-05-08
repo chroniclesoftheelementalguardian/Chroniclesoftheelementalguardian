@@ -10,6 +10,7 @@ public class PlayerCombat
     private List<Skill> _skills = new List<Skill>();
     private int _currentSelectedSkillID = 0;
     private Transform transform;
+    private GameObject shieldGameObject;
     
     private bool _isDefenseActive;
     private bool _isBasicAttackOnCooldown;
@@ -47,10 +48,11 @@ public class PlayerCombat
         BasicAttack();
     }
 
-    public PlayerCombat(PlayerStats playerStats, Transform transform)
+    public PlayerCombat(PlayerStats playerStats, Transform transform, GameObject shieldGO)
     {
         this.playerStats = playerStats;
         this.transform = transform;
+        shieldGameObject = shieldGO;
         RegisterEvents();
         ConstructSkills();
     }
@@ -59,8 +61,14 @@ public class PlayerCombat
     {
         if(CanDefend(damageType)) return;
         float currentHealth = CalculateCurrentHealth(damage, damageType);
-        if(IsDead(currentHealth)){ Death?.Invoke(); }
+        if(IsDead(currentHealth)){ Die(); }
         playerStats.CurrentHealth = currentHealth;
+    }
+
+    private void Die()
+    {
+        Death?.Invoke();
+        transform.gameObject.SetActive(false);
     }
 
     private float CalculateCurrentHealth(float damage, DamageType damageType)
@@ -167,6 +175,7 @@ public class PlayerCombat
         {
             _isDefenseActive = false;
             _defenseCounter = float.MaxValue;
+            shieldGameObject.SetActive(false);
         }
         _defenseCounter += Time.deltaTime;
     }
@@ -175,7 +184,8 @@ public class PlayerCombat
     private void Defend()
     {
         if(_isDefenseActive == true) return;
-        Debug.Log("Defense Activated");
+        shieldGameObject.SetActive(true);
+
         _isDefenseActive = true;
         _defenseCounter = 0;
     }

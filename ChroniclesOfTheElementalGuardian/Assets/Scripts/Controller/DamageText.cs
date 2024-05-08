@@ -18,7 +18,7 @@ public class DamageText : MonoBehaviour
         if(damage <= 0)
         {
             damageText.text = "Resisted";
-            damageText.color = Color.green;
+            damageText.color = Color.blue;
         }
         else
         {

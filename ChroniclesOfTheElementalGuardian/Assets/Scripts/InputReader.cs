@@ -15,8 +15,35 @@ public class InputReader : Singleton<InputReader>
     public static event Action NextSkillPressed;
     public static event Action PreviousSkillPressed;
     
-    // Update is called once per frame
+    private bool isPlayerActive = true;
+
+
+    private void Start() 
+    {
+        PlayerCombat.Death += DisablePlayerControls;
+        ZenoRealmKeeper.PlayerSuccess += DisablePlayerControls;
+    }
+
+    private void DisablePlayerControls()
+    {
+        isPlayerActive = false;
+    }
+
+    private void OnDestroy() 
+    {
+        PlayerCombat.Death -= DisablePlayerControls;
+        ZenoRealmKeeper.PlayerSuccess -= DisablePlayerControls;
+    }
+
     void Update()
+    {
+        if(isPlayerActive)
+        {
+            PlayerControls();
+        }
+    }
+
+    private void PlayerControls()
     {
         if(Input.GetKey(KeyCode.D))
         {

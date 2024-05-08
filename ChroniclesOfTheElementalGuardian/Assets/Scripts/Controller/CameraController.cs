@@ -18,4 +18,9 @@ public class CameraController : MonoBehaviour
     {
         cinemachineVirtualCamera.m_Follow = null;
     }
+
+    private void OnDestroy() 
+    {
+        DeathTrigger.GameFinished -= OnGameFinished;
+    }
 }

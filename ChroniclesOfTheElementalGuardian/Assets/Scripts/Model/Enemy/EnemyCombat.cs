@@ -8,6 +8,7 @@ public class EnemyCombat
     EnemyStats _enemyStats;
     Transform transform;
     private float _meleeCooldownCounter = float.MaxValue;
+    public float MeleeCooldownCounter {get {return _meleeCooldownCounter;}}
 
     public event Action Attacking;
 
@@ -17,6 +18,14 @@ public class EnemyCombat
         _enemyStats =enemyStats;
         _player = player;
         this.transform = transform;
+    }
+
+    public void AttackCooldown()
+    {
+        if(_meleeCooldownCounter < _enemyStats.MeleeCooldown)
+        {
+            _meleeCooldownCounter += Time.deltaTime;
+        }
     }
 
     public void Attack()
@@ -40,7 +49,6 @@ public class EnemyCombat
     {
         if(_meleeCooldownCounter < _enemyStats.MeleeCooldown)
         {
-            _meleeCooldownCounter += Time.deltaTime;
             return true;
         }
         return false;
@@ -49,5 +57,10 @@ public class EnemyCombat
     private void ResetCooldown()
     {
         _meleeCooldownCounter = 0;
+    }
+
+    public float GetAttackCooldown()
+    {
+        return _enemyStats.MeleeCooldown;
     }
 }
