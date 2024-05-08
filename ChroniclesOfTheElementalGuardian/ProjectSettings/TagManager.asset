@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Enemy
   - Potion
+  - JumpTrigger
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using System;
 using ObjectPooling;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class Enemy : MonoBehaviour, IDamagable
     EnemyAnimator enemyAnimator;
 
     private float _currentHealth;
+    public static event Action<Enemy> Death;
 
     private void Awake() 
     {
@@ -76,6 +78,7 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private void Die()
     {
+        Death?.Invoke(this);
         gameObject.SetActive(false);
     }
 
@@ -101,5 +104,10 @@ public class Enemy : MonoBehaviour, IDamagable
     public float GetCurrentHealth()
     {
         return _currentHealth;
+    }
+
+    public EnemyMovement GetEnemyMovement()
+    {
+        return enemyMovement;
     }
 }

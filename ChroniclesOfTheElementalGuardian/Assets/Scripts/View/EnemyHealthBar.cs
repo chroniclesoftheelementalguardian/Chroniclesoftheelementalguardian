@@ -19,6 +19,7 @@ public class EnemyHealthBar : MonoBehaviour
     {
         _healthText.text = $"{Mathf.FloorToInt(_enemy.GetCurrentHealth())}";
         _healthBarImage.fillAmount = _enemy.GetCurrentHealth() / _enemyStats.MaxHealth;
-        _healthText.transform.forward = Camera.main.transform.forward;
+        //_healthText.transform.forward = Camera.main.transform.forward;
+        transform.forward = Camera.main.transform.forward;
     }
 }

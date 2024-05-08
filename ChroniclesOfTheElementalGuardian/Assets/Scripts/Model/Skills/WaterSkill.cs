@@ -16,7 +16,7 @@ public class WaterSkill : Skill
 
     public override string GetSkillName()
     {
-        return "Water";
+        return "Water Arrow";
     }
 
     public override void Use(float abilityPower, Transform userTransform)

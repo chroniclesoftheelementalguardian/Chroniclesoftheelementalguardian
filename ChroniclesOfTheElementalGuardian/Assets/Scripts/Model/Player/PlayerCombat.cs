@@ -191,7 +191,7 @@ public class PlayerCombat
     private void SelectPreviousSkill()
     {
         _currentSelectedSkillID--;
-        if(_currentSelectedSkillID <= 0){ _currentSelectedSkillID = _skills.Count - 1; }
+        if(_currentSelectedSkillID < 0){ _currentSelectedSkillID = _skills.Count - 1; }
         _selectedSkill = _skills[_currentSelectedSkillID];
         SkillChanged?.Invoke(_selectedSkill);
     }

@@ -17,7 +17,7 @@ public class AirSkill : Skill
 
     public override string GetSkillName()
     {
-        return "Air";
+        return "Air Nebula";
     }
 
     public override void Use(float abilityPower, Transform userTransform)

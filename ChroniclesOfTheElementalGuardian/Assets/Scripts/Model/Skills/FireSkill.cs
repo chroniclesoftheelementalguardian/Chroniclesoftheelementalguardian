@@ -16,7 +16,7 @@ public class FireSkill : Skill
 
     public override string GetSkillName()
     {
-        return "Fire";
+        return "Fireball";
     }
 
     public override void Use(float abilityPower, Transform userTransform)

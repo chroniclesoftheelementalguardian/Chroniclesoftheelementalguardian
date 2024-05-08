@@ -27,8 +27,8 @@ public class StatsUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        _physicalPowerText.text = $"Physical Power: {playerStats.PhysicalPower}";
-        _abilityPowerText.text = $"Ability Power: {playerStats.AbilityPower}";
+        _physicalPowerText.text = $"{playerStats.PhysicalPower}";
+        _abilityPowerText.text = $"{playerStats.AbilityPower}";
         _currentHealthText.text = $"{Mathf.FloorToInt(playerStats.CurrentHealth)} / {Mathf.FloorToInt(playerStats.MaxHealth)}";
         _currentManaText.text = $"{Mathf.FloorToInt(playerStats.CurrentMana)} / {Mathf.FloorToInt(playerStats.MaxMana)}";
         _healthBarImage.fillAmount = playerStats.CurrentHealth / playerStats.MaxHealth;

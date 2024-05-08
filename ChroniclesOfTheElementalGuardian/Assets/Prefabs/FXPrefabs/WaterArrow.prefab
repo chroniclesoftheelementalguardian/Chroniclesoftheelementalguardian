@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8486534101139623197}
   - component: {fileID: 3009743995578331389}
   - component: {fileID: -524625926497061378}
+  - component: {fileID: 5751612898890343743}
   m_Layer: 0
   m_Name: WaterArrow
   m_TagString: Untagged
@@ -119,3 +120,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9200284ce28921044809fba0a4ce7e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &5751612898890343743
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2947087830748922739}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.14, y: -0.03}
+  serializedVersion: 2
+  m_Radius: 0.14

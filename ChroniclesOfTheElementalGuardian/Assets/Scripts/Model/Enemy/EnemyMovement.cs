@@ -40,7 +40,7 @@ public class EnemyMovement
         MoveToPlayer();
     }
 
-    private void MoveToPlayer()
+    public void MoveToPlayer()
     {
         Move?.Invoke(true);
         Vector3 direction = (_player.transform.position - transform.position).normalized;
