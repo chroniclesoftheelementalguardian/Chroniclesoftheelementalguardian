@@ -279,6 +279,7 @@ MonoBehaviour:
   playerDetection: {fileID: 2951033131219092057}
   animator: {fileID: 157076559653548338}
   _isRange: 0
+  _isFinalBoss: 0
 --- !u!1839735485 &2062786578239594575
 Tilemap:
   m_ObjectHideFlags: 0
@@ -390,7 +391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7150277252952846724, guid: ba7b06d0650a7d846a63de0f297a445e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.676
+      value: 0.93900007
       objectReference: {fileID: 0}
     - target: {fileID: 7150277252952846724, guid: ba7b06d0650a7d846a63de0f297a445e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -452,7 +453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4335331175377189712, guid: 8d3012d20fc0e66449a3b81b9bb37fcb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.56
+      value: 0.823
       objectReference: {fileID: 0}
     - target: {fileID: 4335331175377189712, guid: 8d3012d20fc0e66449a3b81b9bb37fcb, type: 3}
       propertyPath: m_LocalPosition.z

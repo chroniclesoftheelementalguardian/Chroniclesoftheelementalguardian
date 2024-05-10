@@ -37,7 +37,7 @@ public class DamageText : MonoBehaviour
     public void SetupAsPotion(string effectText)
     {
         damageText.text = effectText;
-        if(SceneManager.GetActiveScene().buildIndex == 1)
+        if(SceneManager.GetActiveScene().buildIndex == 2)
         {
             damageText.color = Color.green;
         }

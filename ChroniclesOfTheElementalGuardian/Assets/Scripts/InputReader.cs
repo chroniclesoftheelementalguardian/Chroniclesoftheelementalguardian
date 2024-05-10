@@ -22,6 +22,7 @@ public class InputReader : Singleton<InputReader>
     {
         PlayerCombat.Death += DisablePlayerControls;
         ZenoRealmKeeper.PlayerSuccess += DisablePlayerControls;
+        Enemy.Credits += DisablePlayerControls;
     }
 
     private void DisablePlayerControls()
@@ -33,6 +34,7 @@ public class InputReader : Singleton<InputReader>
     {
         PlayerCombat.Death -= DisablePlayerControls;
         ZenoRealmKeeper.PlayerSuccess -= DisablePlayerControls;
+        Enemy.Credits -= DisablePlayerControls;
     }
 
     void Update()

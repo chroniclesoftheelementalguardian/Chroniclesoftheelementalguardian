@@ -41,9 +41,10 @@ public class SuccessUI : MonoBehaviour
     {
         int currentBuildIndex = SceneManager.GetActiveScene().buildIndex;
         currentBuildIndex++;
-        if(currentBuildIndex >= SceneManager.sceneCount)
+        Debug.Log("Current Build Index: " + currentBuildIndex);
+        if(currentBuildIndex > 2)
         {
-            currentBuildIndex = 0;
+            currentBuildIndex = 1;
         }
         SceneManager.LoadScene(currentBuildIndex);
     }

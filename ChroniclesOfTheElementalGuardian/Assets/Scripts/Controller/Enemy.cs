@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour, IDamagable
     [SerializeField] private PlayerDetection playerDetection;
     [SerializeField] private Animator animator;
     [SerializeField] private bool _isRange;
+    [SerializeField] private bool _isFinalBoss;
     Player _player;
     EnemyMovement enemyMovement;
     EnemyCombat enemyCombat;
@@ -15,6 +16,7 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private float _currentHealth;
     public static event Action<Enemy> Death;
+    public static event Action Credits;
 
     private void Awake() 
     {
@@ -83,7 +85,15 @@ public class Enemy : MonoBehaviour, IDamagable
         ZenoRealmKeeper zenoRealmKeeper = GetComponent<ZenoRealmKeeper>();
         if( zenoRealmKeeper!= null)
         {
-            zenoRealmKeeper.InvokePlayerSuccess();
+            if(_isFinalBoss)
+            {
+                Credits?.Invoke();
+            }
+            else
+            {
+                zenoRealmKeeper.InvokePlayerSuccess();
+            }
+            
         }
         Death?.Invoke(this);
         gameObject.SetActive(false);
