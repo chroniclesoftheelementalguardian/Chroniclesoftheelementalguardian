@@ -91,7 +91,9 @@ public class PlayerCombat
     {
         if(_isDefenseActive && damageType == DamageType.Physical) 
         {
-            Debug.Log("Defended An Attack");
+            PoolObject poolObject = IObjectPool.GetFromPool("DamageText", true);
+            poolObject.GetGameObject().GetComponent<DamageText>().SetupAsDefend();
+            poolObject.SetWorldPosition(transform.position + Vector3.up * 3/4);
             return true;
         }
         return false;
@@ -118,7 +120,7 @@ public class PlayerCombat
     private void ConstructSkills()
     {
         _skills.Add(new FireSkill());
-        _skills.Add(new EarthSkill());
+        //_skills.Add(new EarthSkill());
         _skills.Add(new AirSkill());
         _skills.Add(new WaterSkill());
         _selectedSkill = _skills[_currentSelectedSkillID];

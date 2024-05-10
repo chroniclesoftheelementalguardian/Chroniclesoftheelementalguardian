@@ -1035,8 +1035,6 @@ MonoBehaviour:
   skillSprites:
   - skillGameobject: {fileID: 6419742981614514662}
     skillName: Air Nebula
-  - skillGameobject: {fileID: 434958412182884196}
-    skillName: Earth
   - skillGameobject: {fileID: 3534498317519934870}
     skillName: Fireball
   - skillGameobject: {fileID: 6493070655002014502}

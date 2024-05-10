@@ -10,6 +10,7 @@ public class WhitePotion : Potion
         ActivateEffect();
         ActivateDuration();
         DeactivateVisuals();
+        SpawnEffectText("Move Speed++");
     }
 
     protected override void ActivateEffect()

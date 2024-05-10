@@ -16,6 +16,7 @@ public class BlackPotion : Potion
         _playerStats = playerStats;
         DeactivateVisuals();
         ActivateEffect();
+        SpawnEffectText("All Stats++");
         ActivateDuration();
     }
 

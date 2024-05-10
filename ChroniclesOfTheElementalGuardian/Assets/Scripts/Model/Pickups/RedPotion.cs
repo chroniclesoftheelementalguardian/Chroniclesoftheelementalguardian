@@ -11,6 +11,7 @@ public class RedPotion : Potion
         _playerStats = playerStats;
         DeactivateVisuals();
         ActivateEffect();
+        SpawnEffectText("Power ++");
         ActivateDuration();
     }
 

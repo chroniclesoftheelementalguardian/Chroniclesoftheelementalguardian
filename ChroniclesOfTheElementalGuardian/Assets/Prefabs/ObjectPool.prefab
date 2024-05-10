@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6725333700817974642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8464651769993564545}
+  - component: {fileID: 7164979327328539852}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8464651769993564545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6725333700817974642}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.3897598, y: 1.0196637, z: -0.05042922}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7164979327328539852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6725333700817974642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7378107539b1ab54ca8e9acea0e45a4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolSlots:
+  - _slotTag: Projectile
+    _slotSize: 10
+    _objectToPool: {fileID: 5871906696511807061, guid: d5f796cc89e2cce438082dcdbb8eab30, type: 3}
+  - _slotTag: Swoosh
+    _slotSize: 5
+    _objectToPool: {fileID: 4857816280038492018, guid: ac98fbe5d123dc340b005ee1c13f9b5b, type: 3}
+  - _slotTag: DamageText
+    _slotSize: 5
+    _objectToPool: {fileID: 7162820455022411362, guid: f48b3d2e77944174594921de5afa7e51, type: 3}
+  - _slotTag: AirNebula
+    _slotSize: 5
+    _objectToPool: {fileID: 1074101822973241491, guid: 3b2aa75e6365c8145a445ab1611cc28b, type: 3}
+  - _slotTag: Fireball
+    _slotSize: 5
+    _objectToPool: {fileID: 7471640960170668931, guid: 57266b574f6897e4baf6f97965fb7afb, type: 3}
+  - _slotTag: WaterArrow
+    _slotSize: 5
+    _objectToPool: {fileID: 2947087830748922739, guid: 670202b65ba0d09488bf2c9ad805b882, type: 3}
+  - _slotTag: BlockDisableFX
+    _slotSize: 1
+    _objectToPool: {fileID: 9071351158567230349, guid: 60b673ca34407b648a2210230710ebb7, type: 3}

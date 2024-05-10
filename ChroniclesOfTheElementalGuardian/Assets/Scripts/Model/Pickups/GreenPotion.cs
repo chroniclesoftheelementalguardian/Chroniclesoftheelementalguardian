@@ -4,6 +4,7 @@ public class GreenPotion : Potion
     {
         _playerStats = playerStats;
         ActivateEffect();
+        SpawnEffectText("Health++");
         DeactivateVisuals();
     }
 

@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour, IDamagable
     [SerializeField] private EnemyStats enemyStats;
     [SerializeField] private PlayerDetection playerDetection;
     [SerializeField] private Animator animator;
+    [SerializeField] private bool _isRange;
     Player _player;
     EnemyMovement enemyMovement;
     EnemyCombat enemyCombat;
@@ -20,7 +21,7 @@ public class Enemy : MonoBehaviour, IDamagable
         _player = FindObjectOfType<Player>();
         _currentHealth = enemyStats.MaxHealth;
         enemyMovement = new EnemyMovement(enemyStats,playerDetection,transform,_player);
-        enemyCombat = new EnemyCombat(enemyStats,_player,transform);
+        enemyCombat = new EnemyCombat(enemyStats,_player,transform,_isRange);
         enemyAnimator = new EnemyAnimator(animator,enemyCombat,enemyMovement);
     }
 

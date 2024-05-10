@@ -1,4 +1,5 @@
 using UnityEngine;
+using ObjectPooling;
 
 public abstract class Potion : MonoBehaviour
 {
@@ -47,5 +48,14 @@ public abstract class Potion : MonoBehaviour
             DeactivateEffect();
         }
         _durationCounter += Time.deltaTime;
-    }   
+    }
+
+    protected void SpawnEffectText(string effectText)
+    {
+        PoolObject poolObject = IObjectPool.GetFromPool("DamageText", false);
+        DamageText damageText = poolObject.GetGameObject().GetComponent<DamageText>();
+        damageText.SetupAsPotion(effectText);
+        poolObject.SetWorldPosition(transform.position + Vector3.up);
+        poolObject.SetActive(true);
+    } 
 }

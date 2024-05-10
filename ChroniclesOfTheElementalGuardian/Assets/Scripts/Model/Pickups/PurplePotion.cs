@@ -5,7 +5,7 @@ public class PurplePotion : Potion
         _playerStats = playerStats;
         DeactivateVisuals();
         ActivateEffect();
-        ActivateDuration();
+        SpawnEffectText("Double Jump");
     }
 
     protected override void ActivateEffect()

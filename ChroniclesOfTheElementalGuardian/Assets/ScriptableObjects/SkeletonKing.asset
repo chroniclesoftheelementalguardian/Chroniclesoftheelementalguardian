@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7f6a007d98784e449e05cd2d29c7b3f, type: 3}
-  m_Name: Knight
+  m_Name: SkeletonKing
   m_EditorClassIdentifier: 
-  _moveSpeed: 1.25
+  _moveSpeed: 2.5
   _jumpingPower: 5
   _landingPower: 5
-  _maxHealth: 130
-  _physicalPower: 30
+  _maxHealth: 200
+  _physicalPower: 35
   _abilityPower: 5
-  _physicalArmor: 12
-  _fireArmor: 0
-  _earthArmor: 40
-  _waterArmor: 40
-  _airArmor: 20
+  _physicalArmor: 14
+  _fireArmor: 50
+  _earthArmor: 30
+  _waterArmor: 0
+  _airArmor: 5
   _meleeRange: 1
-  _meleeCooldown: 1.2
+  _meleeCooldown: 1

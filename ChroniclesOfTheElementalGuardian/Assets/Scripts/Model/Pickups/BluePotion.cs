@@ -4,6 +4,7 @@ public class BluePotion : Potion
     {
         _playerStats = playerStats;
         ActivateEffect();
+        SpawnEffectText("Mana++");
         DeactivateVisuals();
     }
 
