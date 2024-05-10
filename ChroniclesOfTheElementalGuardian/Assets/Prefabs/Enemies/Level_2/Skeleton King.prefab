@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 3ed8ba93ca34f754d8504da177486b48, type: 3}
+  m_Sprite: {fileID: 678008272, guid: 7582fa1da5464da4faf2e0515e9e364b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 413216632161053430}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6ca31ed8e1dc70d4c8eeeffb545b1b60, type: 2}
+  m_Controller: {fileID: 9100000, guid: bd277baab37a7dd4886070ce625dfe81, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -171,7 +171,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 2.48}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -182,7 +182,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6, y: 6}
+  m_Size: {x: 6, y: 6.35}
   m_EdgeRadius: 0
 --- !u!114 &2951033131219092057
 MonoBehaviour:
@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 1573134449848225742}
   - component: {fileID: 2062786578239594575}
   - component: {fileID: 695732634506530720}
+  - component: {fileID: 7356314369186579210}
   m_Layer: 3
   m_Name: Skeleton King
   m_TagString: Enemy
@@ -351,6 +352,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.05}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &7356314369186579210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5362775783364035434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a764c7ca1a5d8408a399ebdf0fe229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeEnemies:
+  - {fileID: 0}
+  enemy: {fileID: 1573134449848225742}
+  shouldJumptoOtherSide: 1
 --- !u!1001 &3243215077261945686
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class ZenoRealmKeeper : MonoBehaviour
     private EnemyMovement enemyMovement;
     Rigidbody2D rb2D;
     private bool _isMoving;
+    [SerializeField] private bool shouldJumptoOtherSide;
 
     public static event Action PlayerSuccess;
     
@@ -57,7 +58,15 @@ public class ZenoRealmKeeper : MonoBehaviour
     public void Jump()
     {
         _isMoving = false;
-        rb2D.AddForce(Vector2.left * 4 + Vector2.up * 3, ForceMode2D.Impulse);
+        if(shouldJumptoOtherSide)
+        {
+            rb2D.AddForce(Vector2.left * -transform.right * 4 + Vector2.up * 3, ForceMode2D.Impulse);
+        }
+        else
+        {
+            rb2D.AddForce(Vector2.left * 4 + Vector2.up * 3, ForceMode2D.Impulse);
+        }
+        
     }
 
     public void InvokePlayerSuccess()

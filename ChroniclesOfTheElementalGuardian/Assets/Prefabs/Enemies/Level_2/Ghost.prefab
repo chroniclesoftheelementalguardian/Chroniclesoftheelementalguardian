@@ -81,6 +81,7 @@ MonoBehaviour:
   enemyStats: {fileID: 11400000, guid: 921e2bd91eb4d3d45988f8ccfa422eff, type: 2}
   playerDetection: {fileID: 1535644983869816517}
   animator: {fileID: 7932982688644291072}
+  _isRange: 0
 --- !u!1839735485 &6348849443519906296
 Tilemap:
   m_ObjectHideFlags: 0
@@ -339,7 +340,7 @@ Animator:
   m_GameObject: {fileID: 8906620902859791631}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6ca31ed8e1dc70d4c8eeeffb545b1b60, type: 2}
+  m_Controller: {fileID: 9100000, guid: b685dadff3ef0d64699b61ed430c625a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
